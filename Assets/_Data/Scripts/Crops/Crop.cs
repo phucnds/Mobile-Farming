@@ -1,16 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Crop : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform cropRenderer;
 
-    // Update is called once per frame
-    void Update()
+    public void ScaleUp()
     {
-        
+        cropRenderer.gameObject.LeanScale(Vector3.one, 1).setEase(LeanTweenType.easeOutBack);
     }
 }

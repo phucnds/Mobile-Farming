@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Watering
+  m_Name: Water
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -46,7 +46,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a618041f2af18b944a943513342cbdcd, type: 2}
+  m_Motion: {fileID: 7400000, guid: 9769b10aefebfa444b338df0e7d0979e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

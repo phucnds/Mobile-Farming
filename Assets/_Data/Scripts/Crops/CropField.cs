@@ -11,8 +11,10 @@ public class CropField : MonoBehaviour
 
     private FieldTileState state;
     private int tilesSown;
+    private int tilesWatered;
 
     public static Action<CropField> onFullySown;
+    public static Action<CropField> onFullyWatered;
 
     private void Start()
     {
@@ -51,9 +53,9 @@ public class CropField : MonoBehaviour
 
             if (closestCropTile == null) continue;
 
-            if (!closestCropTile.IsEmpty()) continue;
+            if (!closestCropTile.IsSown()) continue;
 
-            Sow(closestCropTile);
+            Watering(closestCropTile);
         }
     }
 
@@ -69,10 +71,28 @@ public class CropField : MonoBehaviour
 
     }
 
+    private void Watering(CropTile cropTile)
+    {
+        cropTile.Watering(cropData);
+        tilesWatered++;
+
+        if (tilesWatered == cropTiles.Count)
+        {
+            FieldFullyWatered();
+        }
+
+    }
+
     private void FieldFullySown()
     {
         state = FieldTileState.Sown;
         onFullySown?.Invoke(this);
+    }
+
+    private void FieldFullyWatered()
+    {
+        state = FieldTileState.Watered;
+        onFullyWatered?.Invoke(this);
     }
 
     private CropTile GetClosetCropTile(Vector3 pos)

@@ -12,7 +12,7 @@ public class PlayerWaterAbility : MonoBehaviour
         playerToolSelector = GetComponent<PlayerToolSelector>();
 
         WaterParticles.onWaterCollided += WaterCollisionCallback;
-        // CropField.onFullySown += CropFieldFullySown;
+        CropField.onFullyWatered += CropFieldFullyWatered;
         playerToolSelector.onToolSelected += ToolSelectedCallback;
     }
 
@@ -27,7 +27,7 @@ public class PlayerWaterAbility : MonoBehaviour
     private void OnDestroy()
     {
         WaterParticles.onWaterCollided -= WaterCollisionCallback;
-        // CropField.onFullySown -= CropFieldFullySown;
+        CropField.onFullyWatered -= CropFieldFullyWatered;
 
         playerToolSelector.onToolSelected -= ToolSelectedCallback;
     }
@@ -55,10 +55,14 @@ public class PlayerWaterAbility : MonoBehaviour
         }
     }
 
-    private void EnteredCropField(CropField currentCropField)
+    private void EnteredCropField(CropField cropField)
     {
         if (playerToolSelector.CanWater())
         {
+            if (currentCropField == null)
+            {
+                currentCropField = cropField;
+            }
             playerAnimator.PlayWaterAnimation();
         }
     }
