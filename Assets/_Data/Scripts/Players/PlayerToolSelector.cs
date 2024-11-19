@@ -43,6 +43,6 @@ public class PlayerToolSelector : MonoBehaviour
 
     public bool CanHarvest()
     {
-        return activeTool == Tool.Sow;
+        return activeTool == Tool.Harvest;
     }
 }

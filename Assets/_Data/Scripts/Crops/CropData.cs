@@ -4,4 +4,7 @@ using UnityEngine;
 public class CropData : ScriptableObject
 {
     public Crop cropPrefab;
+    public CropType cropType;
+    public Sprite Sprite;
+    public int Price;
 }

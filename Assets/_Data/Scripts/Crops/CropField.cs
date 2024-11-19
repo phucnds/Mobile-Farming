@@ -12,9 +12,11 @@ public class CropField : MonoBehaviour
     private FieldTileState state;
     private int tilesSown;
     private int tilesWatered;
+    private int tilesHarvested;
 
     public static Action<CropField> onFullySown;
     public static Action<CropField> onFullyWatered;
+    public static Action<CropField> onFullyHarvested;
 
     private void Start()
     {
@@ -131,5 +133,60 @@ public class CropField : MonoBehaviour
     public bool IsSown()
     {
         return state == FieldTileState.Sown;
+    }
+
+    public void Harvest(Transform harvestSphere)
+    {
+        float sphereRadius = harvestSphere.localScale.x;
+
+        for (int i = 0; i < cropTiles.Count; i++)
+        {
+            if (cropTiles[i].IsEmpty()) continue;
+
+            float distanceCropSphere = Vector3.Distance(harvestSphere.position, cropTiles[i].transform.position);
+
+            if (distanceCropSphere <= sphereRadius)
+            {
+                HarvestTile(cropTiles[i]);
+            }
+
+        }
+    }
+
+    private void HarvestTile(CropTile cropTile)
+    {
+        cropTile.Harvest(cropData);
+        tilesHarvested++;
+        if (tilesHarvested == cropTiles.Count)
+        {
+            FieldFullyHarvested();
+        }
+    }
+
+    private void FieldFullyHarvested()
+    {
+        state = FieldTileState.Empty;
+        tilesSown = 0;
+        tilesWatered = 0;
+        tilesHarvested = 0;
+        onFullyHarvested?.Invoke(this);
+    }
+
+    [NaughtyAttributes.Button]
+    private void InstantlySowTile()
+    {
+        foreach (CropTile item in cropTiles)
+        {
+            Sow(item);
+        }
+    }
+
+    [NaughtyAttributes.Button]
+    private void InstantlyWateringTile()
+    {
+        foreach (CropTile item in cropTiles)
+        {
+            Watering(item);
+        }
     }
 }

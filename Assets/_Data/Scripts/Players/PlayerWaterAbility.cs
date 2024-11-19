@@ -20,7 +20,7 @@ public class PlayerWaterAbility : MonoBehaviour
     {
         if (!playerToolSelector.CanWater())
         {
-            playerAnimator.StopSowAnimation();
+            playerAnimator.StopWaterAnimation();
         }
     }
 

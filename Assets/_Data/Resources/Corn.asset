@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Corn
   m_EditorClassIdentifier: 
   cropPrefab: {fileID: 3256298607721444196, guid: d26452cd78f4c644b843fe527b8ea608, type: 3}
+  cropType: 0
+  Sprite: {fileID: 21300000, guid: 82b1f675f4ea8fb4c8b63b1df1418228, type: 3}
+  Price: 1

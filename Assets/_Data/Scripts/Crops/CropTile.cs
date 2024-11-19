@@ -11,6 +11,9 @@ public class CropTile : MonoBehaviour
 
     private FieldTileState state;
     private Crop crop;
+    private CropData cropData;
+
+    public static Action<CropType> onCropHarvested;
 
     private void Start()
     {
@@ -20,19 +23,25 @@ public class CropTile : MonoBehaviour
     public void Sow(CropData cropData)
     {
         state = FieldTileState.Sown;
-
         crop = Instantiate(cropData.cropPrefab, cropParent);
+        this.cropData = cropData;
     }
 
     public void Watering(CropData cropData)
     {
         state = FieldTileState.Watered;
-        // tileRenderer.material.color = Color.white * .3f;
         crop.ScaleUp();
-
         // StartCoroutine(ColorTileCoroutine());
-
         tileRenderer.gameObject.LeanColor(Color.white * .3f, 1).setEase(LeanTweenType.easeOutBack);
+    }
+
+
+    public void Harvest(CropData cropData)
+    {
+        state = FieldTileState.Empty;
+        crop.ScaleDown();
+        tileRenderer.gameObject.LeanColor(Color.white, 1).setEase(LeanTweenType.easeOutBack);
+        onCropHarvested?.Invoke(cropData.cropType);
     }
 
     /*
