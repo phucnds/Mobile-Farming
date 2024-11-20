@@ -14,6 +14,8 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         CropTile.onCropHarvested += CropHarvestedCallback;
+        AppleTree.onAppHarvested += CropHarvestedCallback;
+
         LoadInventory();
         ConfigureInventoryDisplay();
     }
@@ -21,6 +23,7 @@ public class InventoryManager : MonoBehaviour
     private void OnDestroy()
     {
         CropTile.onCropHarvested -= CropHarvestedCallback;
+        AppleTree.onAppHarvested -= CropHarvestedCallback;
     }
 
     private void ConfigureInventoryDisplay()

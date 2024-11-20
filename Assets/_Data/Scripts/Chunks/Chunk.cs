@@ -7,14 +7,21 @@ public class Chunk : MonoBehaviour
     [SerializeField] private GameObject unlockedElement;
     [SerializeField] private GameObject lockedElement;
     [SerializeField] private TextMeshPro priceText;
-
     [SerializeField] private int intialPrice;
+    [SerializeField] private MeshFilter meshFilter;
+
+    private ChunkWalls chunkWalls;
 
     public static Action onUnlocked;
     public static Action onPriceChange;
 
     private int currentPrice;
     private bool unlocked;
+
+    private void Awake()
+    {
+        chunkWalls = GetComponent<ChunkWalls>();
+    }
 
     private void Start()
     {
@@ -45,13 +52,13 @@ public class Chunk : MonoBehaviour
     {
         unlockedElement.SetActive(true);
         lockedElement.SetActive(false);
-        unlocked = false;
+        unlocked = true;
 
         if (!triggerAction) return;
         onUnlocked?.Invoke();
     }
 
-    private bool IsUnlocked()
+    public bool IsUnlocked()
     {
         return unlocked;
     }
@@ -75,5 +82,28 @@ public class Chunk : MonoBehaviour
         {
             Unlock(false);
         }
+    }
+
+    public void UpdateWalls(int configuration)
+    {
+        chunkWalls.Configure(configuration);
+    }
+
+    public void DisplayLockedElements()
+    {
+        lockedElement.SetActive(true);
+    }
+
+    public void SetRenderer(Mesh chunkMesh)
+    {
+        meshFilter.mesh = chunkMesh;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, Vector3.one * 5);
+
+        Gizmos.color = new Color(0, 0, 0, 0);
+        Gizmos.DrawCube(transform.position, Vector3.one * 5);
     }
 }

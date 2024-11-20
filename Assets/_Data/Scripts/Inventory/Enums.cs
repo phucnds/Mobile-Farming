@@ -1,5 +1,6 @@
 public enum CropType
 {
     Corn,
-    Tomato
+    Tomato,
+    Apple
 }

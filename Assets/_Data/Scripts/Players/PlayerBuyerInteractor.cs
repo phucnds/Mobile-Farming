@@ -26,7 +26,8 @@ public class PlayerBuyerInteractor : MonoBehaviour
             coinEarned += itemPrice * items[i].amount;
         }
 
-        CashManager.Instance.AddCoins(coinEarned);
+        // CashManager.Instance.AddCoins(coinEarned);
+        TransactionEffectManager.Instance.PlayCoinParticlesystem(coinEarned);
 
         inventoryManager.ClearInventory();
     }
