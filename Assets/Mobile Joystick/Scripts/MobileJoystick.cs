@@ -76,6 +76,6 @@ public class MobileJoystick : MonoBehaviour
     public Vector3 GetMoveVector()
     {
         float canvasScale = GetComponentInParent<Canvas>().GetComponent<RectTransform>().localScale.x;
-        return move / canvasScale;
+        return move ;
     }
 }

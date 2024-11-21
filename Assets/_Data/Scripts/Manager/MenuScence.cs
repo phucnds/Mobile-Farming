@@ -43,7 +43,7 @@ public class MenuScene : MonoBehaviour
     [NaughtyAttributes.Button]
     public void ResetGold()
     {
-        PlayerPrefs.SetInt("Coins", 100);
+        PlayerPrefs.SetInt("Coins", 500);
     }
 
     [NaughtyAttributes.Button]

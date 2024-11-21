@@ -22,17 +22,15 @@ public class PlayerController : MonoBehaviour
 
     private void ManageMovement()
     {
-        Vector3 correctDirVector = joystick.GetMoveVector() * moveSpeed * Time.deltaTime / Screen.width;
+        Vector3 correctDirVector = joystick.GetMoveVector().normalized;
         correctDirVector.z = correctDirVector.y;
         correctDirVector.y = 0;
         playerAnimator.ManageAnimations(correctDirVector);
 
-        Vector3 dirVector = joystick.GetMoveVector() * moveSpeed * Time.deltaTime / Screen.width;
+        Vector3 dirVector = joystick.GetMoveVector() / 1.06f * moveSpeed * Time.deltaTime / 1048;
         dirVector.z = dirVector.y;
         dirVector.y = -1;
 
         characterController.Move(dirVector);
-
-
     }
 }

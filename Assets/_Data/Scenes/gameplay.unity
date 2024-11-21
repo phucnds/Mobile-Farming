@@ -12632,7 +12632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 919132149602588169}
-  moveSpeedMultipler: 40
+  moveSpeedMultipler: 1
   waterParticle: {fileID: 637318283}
 --- !u!114 &1211810686
 MonoBehaviour:
