@@ -3,6 +3,15 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
+
+public class DataPath
+{
+    // public static string WorldData = Application.dataPath + "/_Data/StorageData/WorldData.txt";
+    public static string WorldData = Application.persistentDataPath + "WorldData.txt";
+    // public static string InventoryData = Application.dataPath + "/_Data/StorageData/inventory.txt";
+    public static string InventoryData = Application.persistentDataPath + "inventory.txt";
+}
+
 public class WorldManager : MonoBehaviour
 {
     private enum ChunkShape
@@ -25,6 +34,7 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private Mesh[] chunkShapes;
 
     private string dataPath = Application.dataPath + "/_Data/StorageData/WorldData.txt";
+    // private string dataPath = Application.persistentDataPath + "/_Data/StorageData/WorldData.txt";
 
     private WorldData worldData;
     private bool shouldSave;
@@ -185,9 +195,9 @@ public class WorldManager : MonoBehaviour
     {
         string data = "";
 
-        if (!File.Exists(dataPath))
+        if (!File.Exists(DataPath.WorldData))
         {
-            FileStream fs = new FileStream(dataPath, FileMode.Create);
+            FileStream fs = new FileStream(DataPath.WorldData, FileMode.Create);
             worldData = new WorldData();
 
             for (int i = 0; i < world.childCount; i++)
@@ -203,7 +213,7 @@ public class WorldManager : MonoBehaviour
         }
         else
         {
-            data = File.ReadAllText(dataPath);
+            data = File.ReadAllText(DataPath.WorldData);
             worldData = JsonUtility.FromJson<WorldData>(data);
 
             if (worldData.chunkPrices.Count < world.childCount)
@@ -248,6 +258,6 @@ public class WorldManager : MonoBehaviour
         }
 
         string data = JsonUtility.ToJson(worldData, true);
-        File.WriteAllText(dataPath, data);
+        File.WriteAllText(DataPath.WorldData, data);
     }
 }

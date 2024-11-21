@@ -44,4 +44,6 @@ public class DataManager : MonoBehaviour
 
         return price;
     }
+
+    
 }
